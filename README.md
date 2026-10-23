@@ -140,6 +140,28 @@ Or install from disk: **Settings > Plugins > ⚙ > Install Plugin from Disk…**
 
 ---
 
+## Build and test from source
+
+Use JDK 21 or newer. Lexer and PSI sources are generated automatically:
+
+```sh
+./gradlew test buildPlugin
+```
+
+To use an installed GoLand SDK instead of downloading the configured IDE:
+
+```sh
+./gradlew test buildPlugin -PlocalPlatformPath=/Applications/GoLand.app
+```
+
+Plugin archives are written to `build/distributions/` and can be installed via
+**Settings > Plugins > Install Plugin from Disk…**.
+
+Type lookup follows explicit imports and also checks `.api` entry points in
+ancestor project directories that transitively import the current file. This
+supports an entry file importing both App/Web routes and shared types without
+duplicating declarations. Unrelated entry points do not contribute types.
+
 ## Project Structure
 
 ```
